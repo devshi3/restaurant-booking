@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Book a Table</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 30px;
+      }
+      label,
+      input,
+      select,
+      button {
+        display: block;
+        margin: 10px 0;
+      }
+      .response {
+        margin-top: 20px;
+        font-weight: bold;
+        white-space: pre-wrap;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Book a Table</h2>
+    <form id="bookingForm">
+      <label
+        >Name: <input name="customerName" id="customerName" required
+      /></label>
+      <label
+        >Table Size:
+        <input type="number" name="tableSize" id="tableSize" required
+      /></label>
+      <label>Date: <input type="date" name="date" id="date" required /></label>
+      <label>
+        Time:
+        <select name="time" id="time">
+          <option>10:00</option>
+          <option>12:00</option>
+          <option>14:00</option>
+          <option>16:00</option>
+          <option>18:00</option>
+          <option>20:00</option>
+        </select>
+      </label>
+      <button type="submit">Book Table</button>
+    </form>
+
+    <div class="response" id="responseBox"></div>
+    <button id="goBackBtn" class="hidden" onclick="window.location.href='/'">
+      Go to Main Page
+    </button>
+
+    <script>
+      const form = document.getElementById("bookingForm");
+      const responseBox = document.getElementById("responseBox");
+      const goBackBtn = document.getElementById("goBackBtn");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        try {
+          const res = await fetch("/booking", {
+            method: "POST",
+            body: new URLSearchParams(formData),
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          });
+
+          const text = await res.text();
+          responseBox.textContent = `\n${text}`;
+          goBackBtn.classList.remove("hidden");
+          form.reset();
+        } catch (err) {
+          responseBox.textContent = "Error submitting booking.";
+        }
+      });
+    </script>
+  </body>
+</html>

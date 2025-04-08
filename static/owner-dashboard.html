@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Owner Dashboard</title>
+  </head>
+  <body>
+    <h2>Welcome, Restaurant Owner</h2>
+
+    <label for="date">Select Date:</label>
+    <input type="date" id="date" required />
+    <button onclick="fetchBookings()">Fetch Bookings</button>
+
+    <h3>Bookings:</h3>
+    <ul id="bookingList"></ul>
+
+    <button onclick="logout()">Logout</button>
+
+    <script>
+      async function fetchBookings() {
+        const date = document.getElementById("date").value;
+
+        const res = await fetch("/bookings", {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (res.status !== 200) {
+          alert("Unauthorized or failed to fetch bookings.");
+          return;
+        }
+
+        const allBookings = await res.json();
+        const list = document.getElementById("bookingList");
+        list.innerHTML = "";
+
+        if (!date) {
+          // Show all bookings
+          Object.entries(allBookings).forEach(([bookingDate, times]) => {
+            const dateHeader = document.createElement("li");
+            dateHeader.innerHTML = `<strong>${bookingDate}</strong>`;
+            list.appendChild(dateHeader);
+
+            Object.entries(times).forEach(([time, bookingsArray]) => {
+              bookingsArray.forEach((b) => {
+                const li = document.createElement("li");
+                li.textContent = `Time: ${time}, Name: ${b.customerName}, Table Size: ${b.tableSize}`;
+                list.appendChild(li);
+              });
+            });
+          });
+        } else {
+          // Show only bookings for the selected date
+          const dayBookings = allBookings[date];
+          if (!dayBookings) {
+            const noBookings = document.createElement("li");
+            noBookings.textContent = "No bookings for this date.";
+            list.appendChild(noBookings);
+            return;
+          }
+
+          Object.entries(dayBookings).forEach(([time, bookingsArray]) => {
+            bookingsArray.forEach((b) => {
+              const li = document.createElement("li");
+              li.textContent = `Time: ${time}, Name: ${b.customerName}, Table Size: ${b.tableSize}`;
+              list.appendChild(li);
+            });
+          });
+        }
+      }
+
+      async function logout() {
+        const res = await fetch("/logout", {
+          method: "POST",
+          credentials: "include",
+        });
+
+        if (res.status === 200) {
+          alert("Logged out successfully.");
+          window.location.href = "/";
+        }
+      }
+    </script>
+  </body>
+</html>

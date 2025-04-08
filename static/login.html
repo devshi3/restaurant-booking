@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Owner Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 30px;
+      }
+      label,
+      input,
+      button {
+        display: block;
+        margin: 10px 0;
+      }
+      #message {
+        margin-top: 15px;
+        font-weight: bold;
+      }
+      #message.success {
+        color: green;
+      }
+      #message.error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Restaurant Owner Login</h2>
+    <form onsubmit="login(event)">
+      <label>Username:</label>
+      <input type="text" id="username" required />
+      <br />
+      <label>Password:</label>
+      <input type="password" id="password" required />
+      <br />
+      <button type="submit">Login</button>
+    </form>
+    <div id="message"></div>
+
+    <script>
+      async function login(e) {
+        e.preventDefault();
+        const body = new URLSearchParams();
+        body.append("username", document.getElementById("username").value);
+        body.append("password", document.getElementById("password").value);
+
+        const res = await fetch("/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: body,
+        });
+
+        const msg = await res.text();
+        const messageBox = document.getElementById("message");
+
+        if (res.status === 200) {
+          messageBox.className = "success";
+          messageBox.innerText = msg;
+          setTimeout(() => {
+            window.location.href = "/owner-dashboard.html";
+          }, 100);
+        } else {
+          messageBox.className = "error";
+          messageBox.innerText = msg;
+        }
+      }
+    </script>
+  </body>
+</html>

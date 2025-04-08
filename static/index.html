@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome to Our Restaurant</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 50px;
+        text-align: center;
+      }
+      button {
+        margin: 20px;
+        padding: 15px 30px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to the Restaurant Booking System</h1>
+    <p>Please select your role:</p>
+    <button onclick="goToCustomer()">I am a Customer</button>
+    <button onclick="goToOwner()">I am the Restaurant Owner</button>
+
+    <script>
+      function goToCustomer() {
+        window.location.href = "/booking-form.html";
+      }
+
+      function goToOwner() {
+        window.location.href = "/login.html";
+      }
+    </script>
+  </body>
+</html>
