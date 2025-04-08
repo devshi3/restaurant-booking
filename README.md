@@ -35,7 +35,7 @@ A lightweight Java-based REST API with a simple HTML+JS frontend to manage resta
 
 ---
 
-### 📝 Assumptions
+### Assumptions
 
 To simplify the scope and focus on demonstrating core functionality, the following assumptions have been made:
 
@@ -69,7 +69,7 @@ To simplify the scope and focus on demonstrating core functionality, the followi
 
 ---
 
-### 🧑‍🍳 User Roles
+### User Roles
 
 #### 1. Customer
 
@@ -95,7 +95,7 @@ To simplify the scope and focus on demonstrating core functionality, the followi
 
 ---
 
-### ⚙️ API Endpoints
+### API Endpoints
 
 | Method | Endpoint         | Description               |
 |--------|------------------|---------------------------|
