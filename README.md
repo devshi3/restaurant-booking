@@ -14,7 +14,7 @@ A lightweight Java-based REST API with a simple HTML+JS frontend to manage resta
 
 ---
 
-### 🚀 Run the App
+### Run the App
 
 1. **Clone and build:**
    ```bash
