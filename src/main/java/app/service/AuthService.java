@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class AuthService {
     private final Set<String> validTokens = ConcurrentHashMap.newKeySet();
-    private final String validUsername = "owner";
+    private final String validUsername = "admin";
     private final String validPassword = "password123"; // store this securely in real apps
 
     public boolean authenticate(String username, String password) {

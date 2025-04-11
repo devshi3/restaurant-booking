@@ -28,15 +28,13 @@ public class Main {
                 String cookieHeader = request.headers().get("Cookie");
                 if (authService.isValidToken(cookieHeader)) {
                     response.status(200);
-                    response.write("OK");
                 } else {
                     response.status(401);
-                    response.write("Unauthorized");
                 }
             })
             
             .start();
 
-        System.out.println("Server started at " + server.uri());
+            System.out.println("Server started at " + server.uri());
     }
 }
