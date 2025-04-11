@@ -13,6 +13,7 @@ import static io.muserver.MuServerBuilder.httpServer;
 public class Main {
     public static void main(String[] args) {
         BookingRepository repository = new BookingRepository();
+        AuthService authService = new AuthService();
 
         MuServer server = httpServer()
             .withHttpPort(8080)
@@ -20,12 +21,12 @@ public class Main {
 
             .addHandler(Method.POST, "/booking", new CreateBookingHandler(repository))
             .addHandler(Method.GET, "/bookings", new GetAllBookingsHandler(repository))
-            .addHandler(Method.POST, "/login", new OwnerLoginHandler())
-            .addHandler(Method.POST, "/logout", new OwnerLogoutHandler())
+            .addHandler(Method.POST, "/login", new OwnerLoginHandler(authService))
+            .addHandler(Method.POST, "/logout", new OwnerLogoutHandler(authService))
 
             .addHandler(Method.GET, "/check-auth", (request, response, pathParams) -> {
                 String cookieHeader = request.headers().get("Cookie");
-                if (AuthService.isValidToken(cookieHeader)) {
+                if (authService.isValidToken(cookieHeader)) {
                     response.status(200);
                     response.write("OK");
                 } else {
