@@ -10,7 +10,6 @@ public class Booking {
     private String time;
 
     public Booking() {
-        this.uuid = UUID.randomUUID().toString();  // Generate unique ID when object is created
     }
 
     public String getUuid() {
