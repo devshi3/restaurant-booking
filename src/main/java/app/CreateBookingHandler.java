@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
+import app.model.Booking;
+import app.repository.BookingRepository;
+
 public class CreateBookingHandler implements RouteHandler {
     private final BookingRepository repository;
 

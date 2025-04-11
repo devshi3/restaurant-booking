@@ -3,6 +3,9 @@ package app;
 import io.muserver.*;
 import com.google.gson.Gson;
 
+import app.model.Booking;
+import app.repository.BookingRepository;
+
 import java.io.IOException;
 import java.util.*;
 

@@ -17,6 +17,18 @@
     <button onclick="logout()">Logout</button>
 
     <script>
+      window.onload = async function () {
+        const res = await fetch("/check-auth", {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (res.status !== 200) {
+          alert("You must be logged in to access the dashboard.");
+          window.location.href = "/";
+        }
+      };
+
       async function fetchBookings() {
         const date = document.getElementById("date").value;
 

@@ -1,7 +1,9 @@
-package app;
+package app.repository;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+
+import app.model.Booking;
 
 public class BookingRepository {
     private final Map<String, Booking> bookings = new ConcurrentHashMap<>();
