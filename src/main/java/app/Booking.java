@@ -38,7 +38,7 @@ public class Booking {
                 && tableSize > 0 && date != null && time != null;
     }
 
-    //Setters if needed in future
+    //Setters
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
