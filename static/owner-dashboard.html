@@ -25,7 +25,9 @@
 
         if (res.status !== 200) {
           alert("You must be logged in to access the dashboard.");
-          window.location.href = "/";
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 300); // slight delay so alert shows
         }
       };
 
